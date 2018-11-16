@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 
 class DynamicEncoderRNN(nn.Module):
-    def __init__(self, input_size, embed_size,hidden_size, n_layers=1,dropout_p=0.5):
+    def __init__(self, input_size, embed_size,hidden_size, n_layers=1):
         super(DynamicEncoderRNN, self).__init__()
         self.n_layers = n_layers
         self.hidden_size = hidden_size
@@ -65,7 +65,7 @@ class Attn(nn.Module):
         return energy.squeeze(1) #[B*T]
 
 class BahdanauAttnDecoderRNN(nn.Module):
-    def __init__(self, hidden_size, embed_size, output_size, n_layers=2, dropout_p=0.3):
+    def __init__(self, hidden_size, embed_size, output_size, n_layers=2, dropout_p=0.5):
         super(BahdanauAttnDecoderRNN, self).__init__()
         # Define parameters
         self.hidden_size = hidden_size

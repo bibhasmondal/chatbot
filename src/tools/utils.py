@@ -13,8 +13,8 @@ class Handler:
         self.input_voc_size = input_voc_size
         self.encoder = DynamicEncoderRNN(input_voc_size,embed_size,hidden_size)
         self.decoder = BahdanauAttnDecoderRNN(hidden_size,embed_size,output_voc_size)
-        self.encoder_optimizer = optim.Adam(self.encoder.parameters(), lr=learning_rate)
-        self.decoder_optimizer = optim.Adam(self.decoder.parameters(), lr=learning_rate)
+        self.encoder_optimizer = optim.SGD(self.encoder.parameters(), lr=learning_rate)
+        self.decoder_optimizer = optim.SGD(self.decoder.parameters(), lr=learning_rate)
         self.encoder_optimizer_exp_lr_scheduler = optim.lr_scheduler.StepLR(self.encoder_optimizer, step_size=step_size, gamma=gamma)
         self.decoder_optimizer_exp_lr_scheduler = optim.lr_scheduler.StepLR(self.decoder_optimizer, step_size=step_size, gamma=gamma)
         self.criterion = nn.CrossEntropyLoss()
